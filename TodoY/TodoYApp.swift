@@ -14,8 +14,10 @@ struct TodoYApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationStack {
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }.foregroundColor(Color.blue)
         }
     }
 }
