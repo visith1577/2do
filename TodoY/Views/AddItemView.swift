@@ -10,10 +10,11 @@ import SwiftUI
 struct AddItemView: View {
     
     @Binding var newItemTitle: String
-    var onSave: () -> Void
+    var onSave: (Date) -> Void
     var onCancel: () -> Void
     
     @FocusState private var isTextFieldFocused: Bool
+    @State private var deadline = Date()
     
     var body: some View {
         VStack(spacing: 20) {
@@ -29,6 +30,10 @@ struct AddItemView: View {
                 .textInputAutocapitalization(.sentences)
                 .focused($isTextFieldFocused)
             
+            DatePicker("Deadline", selection: $deadline, displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .padding(.horizontal)
+            
             HStack {
                 Button("Cancel", action: onCancel)
                     .foregroundColor(.red)
@@ -36,7 +41,9 @@ struct AddItemView: View {
                 
                 Spacer()
                 
-                Button(action: onSave) {
+                Button(action: {
+                    onSave(deadline)
+                }) {
                     Text("Save")
                         .foregroundColor(.white)
                 }
@@ -63,7 +70,7 @@ struct AddItemView: View {
         VStack {
             AddItemView(
                 newItemTitle: $tempTitle,
-                onSave: {
+                onSave: { deadline in
                     print("Saved item: \(tempTitle)")
                 },
                 onCancel: {

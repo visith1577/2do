@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CoreData
+internal import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -32,11 +32,14 @@ struct ContentView: View {
                     }
                     .buttonStyle(.plain)
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        TodoDetailView(item: item)
                     } label: {
                         VStack(alignment: .leading) {
                             Text(item.title!)
+                                .foregroundColor(item.isCompleted ? .gray : item.ugencyColor.opacity(0.8))
                             Text(item.timestamp!, formatter: itemFormatter)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                         .strikethrough(item.isCompleted, color: .gray)
                         .foregroundColor(item.isCompleted ? .gray : .primary)
@@ -59,17 +62,20 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showAddItemSheet) {
             AddItemView(newItemTitle: $newItemTitle,
-                onSave: addItem,
-                onCancel: {
-                    showAddItemSheet = false
-                    newItemTitle = ""
+                        onSave: { selectedDate in
+                addItem(selectedDate)
+                
+            },
+                        onCancel: {
+                showAddItemSheet = false
+                newItemTitle = ""
             })
         }
         .presentationDetents([.medium])
         .presentationCornerRadius(20)
     }
 
-    private func addItem() {
+    private func addItem(_ deadline: Date) {
         guard !newItemTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
         withAnimation {
@@ -77,6 +83,13 @@ struct ContentView: View {
             newItem.timestamp = Date()
             newItem.title = newItemTitle
             newItem.isCompleted = false
+
+            let newDetail = ItemDetails(context: viewContext)
+            newDetail.details = "new TODO: task"
+            newDetail.deadline = deadline
+            
+            newDetail.item = newItem
+            newItem.detail = newDetail
             
             do {
                 try viewContext.save()

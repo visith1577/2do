@@ -4,5 +4,11 @@
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String" defaultValueString="todo item"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ItemDetails" inverseName="item" inverseEntity="ItemDetails"/>
+    </entity>
+    <entity name="ItemDetails" representedClassName="ItemDetails" syncable="YES" codeGenerationType="class">
+        <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="details" optional="YES" attributeType="String"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="detail" inverseEntity="Item"/>
     </entity>
 </model>

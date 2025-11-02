@@ -5,7 +5,7 @@
 //  Created by visith kumarapperuma on 2025-10-31.
 //
 
-import CoreData
+internal import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -14,9 +14,16 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        for i in 0..<10 {
             let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            newItem.timestamp = Date().addingTimeInterval(TimeInterval(-i * 86400))
+            
+            let newDetail = ItemDetails(context: viewContext)
+            newDetail.details = "Detail for item \(i)"
+            newDetail.deadline = Calendar.current.date(byAdding: .day, value: i + 1, to: Date())
+            
+            newDetail.item = newItem
+            newItem.detail = newDetail
         }
         do {
             try viewContext.save()
