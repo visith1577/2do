@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "hyper-futuristic-ios-todo-app-icon--sleek-minimali-3.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -12,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "convert-this-todo-app-icon-to-dark-mode-version-wi.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -23,6 +25,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "convert-this-todo-app-icon-to-tinted-appearance-ve.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

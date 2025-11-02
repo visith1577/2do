@@ -1,18 +1,18 @@
 //
-//  TodoListView.swift
+//  TodoDetailView.swift
 //  TodoY
 //
-//  Created by visith kumarapperuma on 2025-10-31.
+//  Created by visith kumarapperuma on 2025-11-01.
 //
 
 import SwiftUI
 
-struct TodoListView: View {
+struct TodoDetailView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    TodoListView()
+    TodoDetailView()
 }

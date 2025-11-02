@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "hyper-futuristic-ios-todo-app-icon--sleek-minimali.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
